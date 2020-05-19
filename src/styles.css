@@ -1,0 +1,121 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.App {
+  width: 100%;
+  height: 100vh;
+  background-size: cover;
+  color: white;
+  font-size: 16px;
+  font-family: "Jost", sans-serif;
+  padding: 30px 50px;
+  overflow: hidden;
+}
+
+#myVideo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100vh;
+  width: auto;
+  height: auto;
+  z-index: -1;
+}
+
+.main-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  height: 30%;
+}
+.main-header .logo {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+.main-header .choose-city {
+  background: #FECA3E;
+  color: #343600;
+  text-decoration: none;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  width: 200px;
+  padding: 5px;
+  border-radius: 3px;
+  text-transform: uppercase;
+  outline: none;
+}
+.main-header .choose-city option {
+  font-family: "Jost", sans-serif;
+}
+
+.date-and-location {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 20%;
+}
+.date-and-location .date {
+  color: #FECA3E;
+  font-weight: 600;
+}
+.date-and-location .location {
+  font-size: 4rem;
+}
+
+.weather-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 70%;
+  align-items: center;
+  height: 50%;
+}
+.weather-info .temperature-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.weather-info .temperature-div .convertIcon:hover {
+  cursor: pointer;
+}
+.weather-info .temperature-div .real-temperature {
+  font-size: 6rem;
+  font-weight: 500;
+}
+.weather-info .temperature-div .feels-like-temperature {
+  font-family: "Montserrat", sans-serif;
+  letter-spacing: 2px;
+}
+.weather-info .background {
+  position: absolute;
+  background: white;
+  opacity: 0.1;
+  width: 75vw;
+  height: 200px;
+  margin-left: -50px;
+  filter: blur(1px);
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+  z-index: -1;
+}
+
+.sub-header {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 300;
+  font-size: 1.1rem;
+}
+
+.info {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  font-size: 1.3rem;
+}
+
+/*# sourceMappingURL=styles.css.map */
