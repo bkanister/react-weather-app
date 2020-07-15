@@ -4,4 +4,5 @@
 - React
 - SCSS
 
-![] (weather-app.gif)
+![demo] (https://github.com/bkanister/react-weather-app/blob/master/weather-app.gif)
+
