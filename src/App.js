@@ -5,16 +5,6 @@ import WeatherInfo from "./WeatherInfo";
 import './styles.scss'
 
 export default class App extends React.Component {
-    constructor(props) {
-        super(props);
-        this.getWeather = this.getWeather.bind(this);
-        this.setWeather = this.setWeather.bind(this);
-        this.getLocation = this.getLocation.bind(this);
-        this.setLocation = this.setLocation.bind(this);
-        this.changeCity = this.changeCity.bind(this);
-        this.convertTemp = this.convertTemp.bind(this);
-    }
-
     state = {
         initialCity: '',
         initialLat: '',
@@ -36,8 +26,7 @@ export default class App extends React.Component {
         this.getLocation();
     }
 
-    setLocation(lat, long, city) {
-        console.log('setting location...', lat, long, city)
+    setLocation = (lat, long, city) => {
         this.setState({
             latitude: lat,
             longitude: long,
@@ -49,8 +38,7 @@ export default class App extends React.Component {
         this.getWeather(lat, long)
     }
 
-    setWeather(data) {
-        console.log('setting weather...', data)
+    setWeather = (data) => {
         this.setState({
             temperature: parseInt(data.main['temp'], 10),
             feelsLikeTemp: parseInt(data.main['feels_like'], 10),
@@ -62,7 +50,7 @@ export default class App extends React.Component {
         })
     }
 
-    getLocation() {
+    getLocation = () => {
         fetch('http://ipinfo.io/json?token=d4328e21271872')
             .then((response) => {
                 return response.json();
@@ -70,15 +58,13 @@ export default class App extends React.Component {
             .then((data) => new Promise(() => {
                 const lat = Number(data.loc.split(',')[0]).toFixed(2);
                 const long = Number(data.loc.split(',')[1]).toFixed(2);
-                console.log('getting location...', data);
                 this.setLocation(lat, long, data.city);
         }))
     }
 
 
-    getWeather(lat, long) {
+    getWeather = (lat, long) => {
         let metrics = this.state.metric;
-        console.log('getting weather...', lat, long);
         return fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=366f4fce3fad6e08b35ee24a8d79a753&${metrics}`)
             .then((response) => {
                 return response.json();
@@ -86,17 +72,16 @@ export default class App extends React.Component {
             .then((data) => this.setWeather(data))
     }
 
-    convertTemp() {
+    convertTemp = () => {
         this.setState({
             metric: this.state.metric === 'units=metric' ? this.state.metric = 'units=imperial' : this.state.metric = 'units=metric'
         })
         this.getWeather(this.state.latitude, this.state.longitude)
     }
 
-    changeCity(city) {
+    changeCity = (city) => {
         let data = city.split(',');
         let [cityName, lat, long] = data;
-        console.log(cityName, lat, long);
         this.setState({
             city: cityName,
             latitude: lat,
@@ -111,7 +96,7 @@ export default class App extends React.Component {
         <div className="App">
             <MainHeader initialCity={this.state.initialCity} initialLat={this.state.initialLat} initialLong={this.state.initialLong} city={this.state.city} coord={[this.state.latitude, this.state.longitude]} onChange={this.changeCity}/>
             <DateAndLocation city={this.state.city}/>
-            <WeatherInfo onClick={this.convertTemp} temp={this.state.temperature} feelsLike={this.state.feelsLikeTemp} main={this.state.main}
+            <WeatherInfo convertTemp={this.convertTemp} temp={this.state.temperature} feelsLike={this.state.feelsLikeTemp} main={this.state.main}
             description={this.state.description} wind={this.state.wind} humidity={this.state.humidity} pressure={this.state.pressure}/>
         </div>
       )}

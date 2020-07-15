@@ -1,50 +1,44 @@
-import React from 'react'
+import React, {useState} from 'react'
 
-export default class SelectButton extends React.Component{
-    constructor(props) {
-        super(props);
-        this.handleChange = this.handleChange.bind(this);
-        this.state = {
-            chosenCity: ''
-        }
+const SelectButton = props => {
+    const [city, changeCity] = useState('')
+    const citiesArray = [
+        {
+            name: props.initialCity,
+            lat: props.initialLat,
+            long: props.initialLong,
+        },
+        {
+            name:'Moscow',
+            lat: 55.75,
+            long: 37.61,
+        }, {
+            name:'London',
+            lat: 51.50,
+            long: -0.12,
+        }, {
+            name:'New-York',
+            lat: 40.71,
+            long: -74.00,
+        },
+    ];
+
+    const handleChange = (e) => {
+        props.changeCity(e.target.value);
+        changeCity(e.target.value)
     }
 
+    const citiesOptions = citiesArray.map(city => {
+        return (<option key={city.name} value={[city.name, city.lat, city.long]}>
+                    {city.name}
+                </option>)
+    });
 
-
-    handleChange(e) {
-        this.props.changeCity(e.target.value);
-        this.setState({
-            chosenCity: e.target.value
-        })
-    }
-
-    render() {
-        const cities = [
-            {
-                name: this.props.initialCity,
-                lat: this.props.initialLat,
-                long: this.props.initialLong,
-            },
-            {
-                name:'Moscow',
-                lat: 55.75,
-                long: 37.61,
-            }, {
-                name:'London',
-                lat: 51.50,
-                long: -0.12,
-            }, {
-                name:'New-York',
-                lat: 40.71,
-                long: -74.00,
-            },
-        ];
-        const selectItems = cities.map(city => <option key={city.name} value={[city.name, city.lat, city.long]}>{city.name}</option>);
-        return (
-            <select value={this.state.chosenCity} onChange={this.handleChange} className="choose-city">
-                {selectItems}
-            </select>
-        )
-    }
-
+    return (
+        <select value={city} onChange={handleChange} className="choose-city">
+            {citiesOptions}
+        </select>
+    )
 }
+
+export default SelectButton

@@ -1,7 +1,7 @@
 import React from 'react';
 import SelectButton from "./SelectButton";
 
-export default function MainHeader(props) {
+const MainHeader = (props) => {
     return (
         <header className="main-header">
             <div className="logo">weatherApp</div>
@@ -12,3 +12,5 @@ export default function MainHeader(props) {
         </header>
     )
 }
+
+export default MainHeader
