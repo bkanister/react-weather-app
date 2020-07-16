@@ -61,7 +61,7 @@ export const convertTemperature = createAction('CONVERT_TEMPERATURE', function p
 })
 
 const rootReducer = createReducer(initialState,{
-    [setInitialLocation.type]: (state, action) => {
+    [setInitialLocation]: (state, action) => {
         return {
             ...state,
             initialCity: action.payload.city,
@@ -72,7 +72,7 @@ const rootReducer = createReducer(initialState,{
             city: action.payload.city,
         }
     },
-    [setLocation.type]: (state,action) => {
+    [setLocation]: (state,action) => {
         return {
             ...state,
             latitude: action.payload.lat,
@@ -80,7 +80,7 @@ const rootReducer = createReducer(initialState,{
             city: action.payload.city,
         }
     },
-    [setWeather.type]: (state, action) => {
+    [setWeather]: (state, action) => {
         return {
             ...state,
             temperature: action.payload.temperature,
@@ -92,7 +92,7 @@ const rootReducer = createReducer(initialState,{
             pressure: action.payload.pressure
         }
     },
-    [convertTemperature.type]: (state, action) => {
+    [convertTemperature]: (state, action) => {
         return {
             ...state,
             metric: action.payload.metric

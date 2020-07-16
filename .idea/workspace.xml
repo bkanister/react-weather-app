@@ -20,18 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bef63834-ffd3-4f62-a455-6ecf254fa76e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/ipAPI.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/redux/reducer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/redux/store.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MainHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainHeader.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SelectButton.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/SelectButton.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/openWeatherAPI.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/openWeatherAPI.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/WeatherInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/WeatherInfo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/reducer.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,7 +106,7 @@
       <workItem from="1589188366837" duration="19687000" />
       <workItem from="1589275452949" duration="77000" />
       <workItem from="1594818544059" duration="2752000" />
-      <workItem from="1594883850962" duration="7976000" />
+      <workItem from="1594883850962" duration="8433000" />
     </task>
     <servers />
   </component>

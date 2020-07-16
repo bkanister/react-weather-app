@@ -1,4 +1,5 @@
 import React from 'react'
+import {connect} from "react-redux";
 
 const WeatherInfo = ({convertTemp, ...props}) => {
 
@@ -41,4 +42,16 @@ const WeatherInfo = ({convertTemp, ...props}) => {
     )
 }
 
-export default WeatherInfo
+const mapStateToProps = state => {
+    return {
+        temp: state.temperature,
+        feelsLike: state.feelsLikeTemp,
+        main: state.main,
+        description: state.description,
+        wind: state.wind,
+        humidity: state.humidity,
+        pressure: state.pressure
+    }
+}
+
+export default connect(mapStateToProps, null)(WeatherInfo)

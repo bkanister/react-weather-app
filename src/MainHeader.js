@@ -1,5 +1,6 @@
 import React from 'react';
 import SelectButton from "./SelectButton";
+import {connect} from "react-redux";
 
 const MainHeader = props => {
     return (
@@ -15,4 +16,14 @@ const MainHeader = props => {
     )
 }
 
-export default MainHeader
+const mapStateToProps = state => {
+    return {
+        initialCity: state.initialCity,
+        initialLat: state.initialLat,
+        initialLong: state.initialLong,
+        city: state.city,
+        coord: [state.latitude, state.longitude]
+    }
+}
+
+export default connect(mapStateToProps, null)(MainHeader)

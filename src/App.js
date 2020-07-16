@@ -20,7 +20,7 @@ const App = ({state, dispatch}) => {
             : 'units=metric'
         dispatch(convertTemperature(metrics))
         dispatch(getWeather(state.latitude, state.longitude))
-    }
+    } //todo: fix wind metrics from m/s to km/h
 
     const changeCity = (city) => {
         const data = city.split(',');
@@ -31,21 +31,9 @@ const App = ({state, dispatch}) => {
 
       return (
         <div className="App">
-            <MainHeader initialCity={state.initialCity}
-                        initialLat={state.initialLat}
-                        initialLong={state.initialLong}
-                        city={state.city}
-                        coord={[state.latitude, state.longitude]}
-                        changeCity={changeCity}/>
+            <MainHeader changeCity={changeCity}/>
             <DateAndLocation city={state.city}/>
-            <WeatherInfo convertTemp={convertTemp}
-                         temp={state.temperature}
-                         feelsLike={state.feelsLikeTemp}
-                         main={state.main}
-                         description={state.description}
-                         wind={state.wind}
-                         humidity={state.humidity}
-                         pressure={state.pressure}/>
+            <WeatherInfo convertTemp={convertTemp}/>
         </div>
       )
 }
