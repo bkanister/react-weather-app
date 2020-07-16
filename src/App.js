@@ -1,103 +1,65 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import MainHeader from "./MainHeader";
 import DateAndLocation from "./DateAndLocation";
 import WeatherInfo from "./WeatherInfo";
 import './styles.scss'
+import {convertTemperature, setLocation} from "./redux/reducer";
+import {connect} from "react-redux";
+import {getInitialLocation} from "./ipAPI";
+import {getWeather} from "./openWeatherAPI";
 
-export default class App extends React.Component {
-    state = {
-        initialCity: '',
-        initialLat: '',
-        initialLong: '',
-        city: '',
-        latitude: 0,
-        longitude: 0,
-        temperature: 0,
-        feelsLikeTemp: 0,
-        main: '',
-        description: '',
-        wind: 0,
-        humidity: 0,
-        pressure: 0,
-        metric: 'units=metric'
-    };
+const App = ({state, dispatch}) => {
+    useEffect(() => {
+        dispatch(getInitialLocation())
+    }, [])
 
-    componentDidMount() {
-        this.getLocation();
+
+    const convertTemp = () => {
+        const metrics = state.metric === 'units=metric'
+            ? 'units=imperial'
+            : 'units=metric'
+        dispatch(convertTemperature(metrics))
+        dispatch(getWeather(state.latitude, state.longitude))
     }
 
-    setLocation = (lat, long, city) => {
-        this.setState({
-            latitude: lat,
-            longitude: long,
-            city: city,
-            initialCity: city,
-            initialLat: lat,
-            initialLong: long,
-        });
-        this.getWeather(lat, long)
+    const changeCity = (city) => {
+        const data = city.split(',');
+        const [cityName, lat, long] = data;
+        dispatch(setLocation(lat, long, cityName))
+        dispatch(getWeather(lat, long))
     }
 
-    setWeather = (data) => {
-        this.setState({
-            temperature: parseInt(data.main['temp'], 10),
-            feelsLikeTemp: parseInt(data.main['feels_like'], 10),
-            wind: data.wind['speed'],
-            main: data['weather'][0]['main'],
-            description: data['weather'][0]['description'],
-            humidity: data.main['humidity'],
-            pressure: data.main['pressure']
-        })
-    }
-
-    getLocation = () => {
-        fetch('http://ipinfo.io/json?token=d4328e21271872')
-            .then((response) => {
-                return response.json();
-            })
-            .then((data) => new Promise(() => {
-                const lat = Number(data.loc.split(',')[0]).toFixed(2);
-                const long = Number(data.loc.split(',')[1]).toFixed(2);
-                this.setLocation(lat, long, data.city);
-        }))
-    }
-
-
-    getWeather = (lat, long) => {
-        let metrics = this.state.metric;
-        return fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=366f4fce3fad6e08b35ee24a8d79a753&${metrics}`)
-            .then((response) => {
-                return response.json();
-            })
-            .then((data) => this.setWeather(data))
-    }
-
-    convertTemp = () => {
-        this.setState({
-            metric: this.state.metric === 'units=metric' ? this.state.metric = 'units=imperial' : this.state.metric = 'units=metric'
-        })
-        this.getWeather(this.state.latitude, this.state.longitude)
-    }
-
-    changeCity = (city) => {
-        let data = city.split(',');
-        let [cityName, lat, long] = data;
-        this.setState({
-            city: cityName,
-            latitude: lat,
-            longitude: long
-        });
-        this.getWeather(lat, long)
-    }
-
-
-    render() {
       return (
         <div className="App">
-            <MainHeader initialCity={this.state.initialCity} initialLat={this.state.initialLat} initialLong={this.state.initialLong} city={this.state.city} coord={[this.state.latitude, this.state.longitude]} onChange={this.changeCity}/>
-            <DateAndLocation city={this.state.city}/>
-            <WeatherInfo convertTemp={this.convertTemp} temp={this.state.temperature} feelsLike={this.state.feelsLikeTemp} main={this.state.main}
-            description={this.state.description} wind={this.state.wind} humidity={this.state.humidity} pressure={this.state.pressure}/>
+            <MainHeader initialCity={state.initialCity}
+                        initialLat={state.initialLat}
+                        initialLong={state.initialLong}
+                        city={state.city}
+                        coord={[state.latitude, state.longitude]}
+                        changeCity={changeCity}/>
+            <DateAndLocation city={state.city}/>
+            <WeatherInfo convertTemp={convertTemp}
+                         temp={state.temperature}
+                         feelsLike={state.feelsLikeTemp}
+                         main={state.main}
+                         description={state.description}
+                         wind={state.wind}
+                         humidity={state.humidity}
+                         pressure={state.pressure}/>
         </div>
-      )}
+      )
 }
+
+const mapStateToProps = state => {
+    return {
+        state: state
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        dispatch: dispatch
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)

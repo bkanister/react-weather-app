@@ -23,7 +23,7 @@ const SelectButton = props => {
         },
     ];
 
-    const handleChange = (e) => {
+    const handleChangeCity = (e) => {
         props.changeCity(e.target.value);
         changeCity(e.target.value)
     }
@@ -35,7 +35,7 @@ const SelectButton = props => {
     });
 
     return (
-        <select value={city} onChange={handleChange} className="choose-city">
+        <select value={city} onChange={handleChangeCity} className="choose-city">
             {citiesOptions}
         </select>
     )
